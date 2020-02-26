@@ -1,4 +1,4 @@
-import com.github.anicolaspp.alpakka.maprdb.scaladsl.MapRDBSession
+import com.github.anicolaspp.alpakka.maprdb.MapRDBSession
 import com.github.anicolaspp.ojai.ScalaOjaiTesting
 import org.scalatest.{FlatSpec, Matchers}
 

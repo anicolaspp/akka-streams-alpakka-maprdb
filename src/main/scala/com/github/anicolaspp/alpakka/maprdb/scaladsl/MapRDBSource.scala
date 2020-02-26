@@ -2,6 +2,7 @@ package com.github.anicolaspp.alpakka.maprdb.scaladsl
 
 import akka.NotUsed
 import akka.stream.scaladsl.Source
+import com.github.anicolaspp.alpakka.maprdb.MapRDBSession
 import org.ojai.Document
 import org.ojai.store.Query
 

@@ -18,8 +18,8 @@ libraryDependencies ++= Seq(
 
   "com.mapr.db" % "maprdb" % "6.1.0-mapr",
   "xerces" % "xercesImpl" % "2.11.0",
-   "com.github.anicolaspp" % "ojai-testing_2.12" % "1.0.12",
-  "org.scalatest" %% "scalatest" % "3.0.8" % Test,,
+  "com.github.anicolaspp" % "ojai-testing_2.12" % "1.0.12",
+  "org.scalatest" %% "scalatest" % "3.0.8" % Test,
   "com.typesafe.akka" %% "akka-stream-testkit" % "2.6.3" % Test
 )
   .map(_.exclude("org.slf4j", "slf4j-log4j12"))
