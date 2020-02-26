@@ -1,4 +1,4 @@
-package com.github.anicolaspp.alpakka
+package com.github.anicolaspp.alpakka.maprdb.scaladsl
 
 import org.ojai.store.{Connection, DocumentStore}
 

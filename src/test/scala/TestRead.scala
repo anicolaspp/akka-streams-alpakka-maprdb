@@ -1,6 +1,6 @@
 import akka.actor.ActorSystem
 import akka.stream.scaladsl.Source
-import com.github.anicolaspp.alpakka.{MapRDBFlow, MapRDBSession, MapRDBSource}
+import com.github.anicolaspp.alpakka.maprdb.scaladsl.{MapRDBFlow, MapRDBSession, MapRDBSource}
 import com.github.anicolaspp.ojai.ScalaOjaiTesting
 import org.ojai.store.QueryCondition
 import org.scalatest.{FlatSpec, Matchers}

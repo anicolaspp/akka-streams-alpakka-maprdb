@@ -1,15 +1,9 @@
-package com.github.anicolaspp.alpakka
+package com.github.anicolaspp.alpakka.maprdb.scaladsl
 
 import akka.NotUsed
-import akka.stream.scaladsl.{Flow, Source}
-import akka.stream.stage.{GraphStage, GraphStageLogic}
-import akka.stream.{Attributes, FlowShape}
-import akka.util.ByteString
+import akka.stream.scaladsl.Source
 import org.ojai.Document
 import org.ojai.store.Query
-
-import scala.concurrent.Future
-
 
 object MapRDBSource {
 
@@ -29,11 +23,3 @@ object MapRDBSource {
       Source.fromIterator(() => store.find(query).asScala.iterator)
     }.mapMaterializedValue(_ => NotUsed)
 }
-
-
-
-
-
-
-
-
