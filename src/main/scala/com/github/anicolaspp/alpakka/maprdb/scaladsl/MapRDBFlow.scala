@@ -95,4 +95,16 @@ object MapRDBFlow {
 
     }.mapMaterializedValue(_ => NotUsed)
 
+  def delete(session: MapRDBSession, tableName: String, parallelism: Int): Flow[String, String, NotUsed] =
+    Flow.fromMaterializer { (mat, _) =>
+      implicit val executor = mat.system.dispatcher
+
+      Flow[String]
+        .mapAsync(parallelism) { id =>
+          Future(session.getStore(tableName).delete(id))(mat.system.dispatcher)
+            .map(_ => id)
+        }
+
+    }.mapMaterializedValue(_ => NotUsed)
+
 }
