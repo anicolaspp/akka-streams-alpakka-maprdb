@@ -13,6 +13,7 @@ object MapRDBSource {
   def fromTable(tableName: String, session: MapRDBSession): Source[Document, NotUsed] =
     Source.fromMaterializer { (mat, _) =>
       val store = session.getStore(tableName)
+      println(store)
 
       Source.fromIterator(() => store.find().asScala.iterator)
     }.mapMaterializedValue(_ => NotUsed)
@@ -21,6 +22,8 @@ object MapRDBSource {
     Source.fromMaterializer { (mat, _) =>
       val store = session.getStore(tableName)
 
-      Source.fromIterator(() => store.find(query).asScala.iterator)
+      val it = store.find(query).asScala.iterator
+
+      Source.fromIterator(() => it)
     }.mapMaterializedValue(_ => NotUsed)
 }
