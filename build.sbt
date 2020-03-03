@@ -23,3 +23,5 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-stream-testkit" % "2.6.3" % Test
 )
   .map(_.exclude("org.slf4j", "slf4j-log4j12"))
+
+parallelExecution in Test := false

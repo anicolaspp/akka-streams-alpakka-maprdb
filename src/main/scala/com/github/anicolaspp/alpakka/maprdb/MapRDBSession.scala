@@ -5,7 +5,6 @@ import org.ojai.store.{Connection, DocumentStore}
 
 import scala.collection.mutable
 
-
 trait MapRDBSession extends AutoCloseable {
   def getStore(storeName: String): DocumentStore
 

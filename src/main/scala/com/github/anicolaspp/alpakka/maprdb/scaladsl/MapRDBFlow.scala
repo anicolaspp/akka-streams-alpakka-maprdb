@@ -1,7 +1,7 @@
 package com.github.anicolaspp.alpakka.maprdb.scaladsl
 
-import akka.NotUsed
-import akka.stream.scaladsl.Flow
+import akka.{Done, NotUsed}
+import akka.stream.scaladsl.{Flow, Keep, Sink}
 import com.github.anicolaspp.alpakka.maprdb.MapRDBSession
 import org.ojai.Document
 
@@ -83,14 +83,26 @@ object MapRDBFlow {
 
     }.mapMaterializedValue(_ => NotUsed)
 
+  /**
+   * Creates a [[Flow]] that deletes ids from the store and returned the same ids.
+   */
   def delete(session: MapRDBSession, tableName: String, parallelism: Int): Flow[String, String, NotUsed] =
     Flow.fromMaterializer { (mat, _) =>
       Flow[String]
         .mapAsync(parallelism) { id =>
-          Future(session.getStore(tableName).delete(id))(mat.system.dispatcher)
-            .map(_ => id)(mat.system.dispatcher)
+          Future {
+            session.getStore(tableName).delete(id)
+
+            id
+          }(mat.system.dispatcher)
         }
+    }
+      .mapMaterializedValue(_ => NotUsed)
 
+
+  def deleteDoc(session: MapRDBSession, tableName: String, parallelism: Int): Flow[Document, String, NotUsed] =
+    Flow.fromMaterializer { (mat, _) =>
+      Flow[Document].mapAsync(parallelism) { doc => Future(doc.getIdString)(mat.system.dispatcher) }
+        .via(delete(session, tableName, parallelism))
     }.mapMaterializedValue(_ => NotUsed)
-
 }
