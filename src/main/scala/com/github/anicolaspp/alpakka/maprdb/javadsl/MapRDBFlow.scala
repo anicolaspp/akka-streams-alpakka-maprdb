@@ -27,8 +27,8 @@ object MapRDBFlow {
    */
   def upsertWithId[T](session: MapRDBSession, tableName: String, parallelism: Int): Flow[akka.japi.Pair[String, T], Document, NotUsed] = {
     val flow: akka.stream.scaladsl.Flow[akka.japi.Pair[String, T], Document, NotUsed] =
-    com.github.anicolaspp.alpakka.maprdb.scaladsl
-      .MapRDBFlow.upsertWithId(session, tableName, parallelism)
+      com.github.anicolaspp.alpakka.maprdb.scaladsl
+        .MapRDBFlow.upsertWithId(session, tableName, parallelism)
 
     flow.asJava
   }
