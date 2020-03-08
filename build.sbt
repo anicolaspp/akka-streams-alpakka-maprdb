@@ -11,8 +11,6 @@ lazy val root = project.in(file("."))
   .settings(testSettings)
   .settings(dependencySettings)
   .settings(releaseSettings)
-  .settings(assemblySettings)
-  .enablePlugins(AssemblyPlugin)
 
 lazy val releaseSettings = Seq(
   homepage := Some(url("https://github.com/anicolaspp/akka-streams-alpakka-maprdb")),
@@ -96,24 +94,24 @@ lazy val testSettings = Seq(
   parallelExecution in Test := false
 )
 
-lazy val assemblySettings = Seq(
-  addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
 
-  assemblyMergeStrategy in assembly := {
-    case PathList("META-INF", xs@_*) => MergeStrategy.discard
-    case n if n.startsWith("reference.conf") => MergeStrategy.concat
-    case x =>
-      val oldStrategy = (assemblyMergeStrategy in assembly).value
-      oldStrategy(x)
-  },
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
 
-  assemblyShadeRules in assembly := Seq(
-    ShadeRule.rename("org.apache.commons.beanutils.**" -> "shadedstuff.beanutils.@1")
-      .inLibrary("commons-beanutils" % "commons-beanutils" % "1.7.0"),
-  ),
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs@_*) => MergeStrategy.discard
+  case n if n.startsWith("reference.conf") => MergeStrategy.concat
+  case x =>
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    oldStrategy(x)
+}
 
-  test in assembly := {},
-
-  assemblyJarName := s"${name.value}-${version.value}.jar"
+assemblyShadeRules in assembly := Seq(
+  ShadeRule.rename("org.apache.commons.beanutils.**" -> "shadedstuff.beanutils.@1")
+    .inLibrary("commons-beanutils" % "commons-beanutils" % "1.7.0"),
 )
+
+test in assembly := {}
+
+assemblyJarName := s"${name.value}-${version.value}.jar"
+
 
