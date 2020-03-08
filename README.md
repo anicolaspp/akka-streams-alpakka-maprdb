@@ -11,7 +11,7 @@ MapR-Database performance is analized in this post [ESG Labs Confirms MapR Outpe
 
 The library can be used in both, Java and Scala through the corresponding APIs. These APIs has been designed to work Akka Strams and follow similar approaches to those presented by Akka. 
 
-## Reading / Stream from MapR-Database
+## Reading / Streaming from MapR-Database
 
 The following is a simple example showing how to use the library in Scala. A table that holds people information is read, parsed, and filtered based on people age.
 
