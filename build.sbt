@@ -11,6 +11,7 @@ lazy val root = project.in(file("."))
   .settings(testSettings)
   .settings(dependencySettings)
   .settings(releaseSettings)
+  .settings(assemblySettings)
 
 lazy val releaseSettings = Seq(
   homepage := Some(url("https://github.com/anicolaspp/akka-streams-alpakka-maprdb")),
@@ -71,23 +72,25 @@ lazy val dependencySettings = Seq(
 
   libraryDependencies ++= Seq(
     "com.typesafe.akka" %% "akka-stream" % "2.6.3",
+    "com.typesafe.akka" %% "akka-actor" % "2.6.3",
+    "com.typesafe.akka" %% "akka-slf4j" % "2.6.3",
 
     "com.mapr.ojai" % "mapr-ojai-driver" % "6.1.0-mapr" % "provided",
-    "org.apache.hadoop" % "hadoop-client" % "2.7.0-mapr-1808",
+    "org.apache.hadoop" % "hadoop-client" % "2.7.0-mapr-1808" % "provided",
     "org.ojai" % "ojai" % "3.0-mapr-1808",
     "org.ojai" % "ojai-scala" % "3.0-mapr-1808",
 
-    "com.mapr.db" % "maprdb" % "6.1.0-mapr",
-    "xerces" % "xercesImpl" % "2.11.0"
+    "com.mapr.db" % "maprdb" % "6.1.0-mapr" % "provided",
+    "xerces" % "xercesImpl" % "2.11.0" % "provided",
   ).map(_.exclude("org.slf4j", "slf4j-log4j12"))
 )
 
 lazy val testSettings = Seq(
   libraryDependencies ++= Seq(
-    "com.github.anicolaspp" % "ojai-testing_2.12" % "1.0.12",
+    "com.github.anicolaspp" % "ojai-testing_2.12" % "1.0.12" % Test,
     "org.scalatest" %% "scalatest" % "3.0.8" % Test,
     "com.typesafe.akka" %% "akka-stream-testkit" % "2.6.3" % Test
-  ).map(_.exclude("org.slf4j", "slf4j-log4j12")),
+  ),
 
   parallelExecution in Test := false
 )
@@ -96,11 +99,14 @@ lazy val assemblySettings = Seq(
   addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
 
   assemblyMergeStrategy in assembly := {
-    case PathList("org", "apache", "spark", "unused", xs@_*) => MergeStrategy.last
-    case x =>
-      val oldStrategy = (assemblyMergeStrategy in assembly).value
-      oldStrategy(x)
+    case PathList("META-INF", xs@_*) => MergeStrategy.discard
+    case n if n.startsWith("reference.conf") => MergeStrategy.concat
+    case x => MergeStrategy.first
   },
+
+  assemblyShadeRules in assembly := Seq(
+    ShadeRule.rename("org.apache.commons.beanutils.**" -> "shadedstuff.beanutils.@1").inLibrary("commons-beanutils" % "commons-beanutils" % "1.7.0"),
+  ),
 
   assemblyJarName := s"${name.value}-${version.value}.jar"
 )
