@@ -102,7 +102,9 @@ lazy val assemblySettings = Seq(
   assemblyMergeStrategy in assembly := {
     case PathList("META-INF", xs@_*) => MergeStrategy.discard
     case n if n.startsWith("reference.conf") => MergeStrategy.concat
-    case x => MergeStrategy.first
+    case x =>
+      val oldStrategy = (assemblyMergeStrategy in assembly).value
+      oldStrategy(x)
   },
 
   assemblyShadeRules in assembly := Seq(
