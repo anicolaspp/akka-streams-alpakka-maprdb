@@ -12,6 +12,7 @@ lazy val root = project.in(file("."))
   .settings(dependencySettings)
   .settings(releaseSettings)
   .settings(assemblySettings)
+  .enablePlugins(AssemblyPlugin)
 
 lazy val releaseSettings = Seq(
   homepage := Some(url("https://github.com/anicolaspp/akka-streams-alpakka-maprdb")),
