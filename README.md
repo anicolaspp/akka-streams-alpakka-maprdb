@@ -90,3 +90,14 @@ The `MapRDBFlow` class provides some useful `Flow`s.
 
 ***This is not an extensive list, but a small way to show some features***.
 
+## Linking
+
+```xml
+<dependency>
+  <groupId>com.github.anicolaspp</groupId>
+  <artifactId>akka-streams-alpakka-maprdb_2.12</artifactId>
+  <version>1.0.0</version>
+</dependency>
+
+```
+
