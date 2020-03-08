@@ -7,9 +7,9 @@ This library is an Akka Streams library that can be used to read and write to [M
 MapR-Database performance is analized in this post [ESG Labs Confirms MapR Outperforms Cassandra and HBase by 10x in the Cloud](https://mapr.com/company/press-releases/esg-labs-confirms-mapr-outperforms/).
 
 
-**akka-streams-alpakka-maprdb** brings reactive to MapR-Datase. Interacting with MapR-Datase can be done in many ways, this post, [Interacting with MapR-Database](https://medium.com/hackernoon/interacting-with-mapr-db-58c4f482efa1) is explained all different available options. However, in the rise of microservices, the use of reactive components with native non-blocking and integrated back preassure is a must which ultimately inspired us to create this library, **akka-streams-alpakka-maprdb**.
+**akka-streams-alpakka-maprdb** brings reactive to MapR-Datase. Interacting with MapR-Datase can be done in many ways, this post [Interacting with MapR-Database](https://medium.com/hackernoon/interacting-with-mapr-db-58c4f482efa1) explaines all different available options. However, in the rise of microservices, the use of reactive components with native non-blocking and integrated back preassure is a must which ultimately inspired us to create this library, **akka-streams-alpakka-maprdb**.
 
-The library can be used in both, Java and Scala through the corresponding APIs. These APIs has been designed to work Akka Strams and follow similar approaches to those presented by Akka. 
+The library can be used in both, Java and Scala through the corresponding APIs. These APIs has been designed to work with Akka Streams and follow similar approaches to those presented by Akka. 
 
 ## Reading / Streaming from MapR-Database
 
@@ -74,7 +74,7 @@ val source: Source[Person, NotUsed] = getKafkaStream()
 val getDocFlow: Flow[Person, Document, NotUsed] = 
   Flow.map(person => connection.newDocument(person))
 
-val toMapRDBSink = MapRDBSink.upset(MapRDBSession(connection),"/tables/people", 10)
+val toMapRDBSink = MapRDBSink.upsert(MapRDBSession(connection),"/tables/people", 10)
 
 source
   .via(getDocFlow)
