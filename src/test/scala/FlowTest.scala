@@ -4,17 +4,18 @@ import com.github.anicolaspp.alpakka.maprdb.MapRDBSession
 import com.github.anicolaspp.alpakka.maprdb.scaladsl.{MapRDBFlow, MapRDBSource}
 import com.github.anicolaspp.ojai.ScalaOjaiTesting
 import org.ojai.store.QueryCondition
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Ignore, Matchers}
 
 import scala.beans.BeanProperty
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
+
 class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
 
   import scala.collection.JavaConverters._
 
-  it should "read from table by id" in {
+  ignore it should "read from table by id" in {
     val store = getConnection().getStore("n1")
 
     (1 to 100)
@@ -36,7 +37,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
     })
   }
 
-  it should "should add objects" in {
+  ignore it should "should add objects" in {
 
     implicit val system = ActorSystem("test")
 
@@ -59,7 +60,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
 
   class Dog(@BeanProperty val name: String, @BeanProperty val age: Int)
 
-  it should "replace" in {
+  ignore it should "replace" in {
 
     implicit val system = ActorSystem("test")
 
@@ -87,7 +88,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
     getConnection().getStore("t2").find(query).asScala.size should be(10)
   }
 
-  it should "delete" in {
+  ignore it should "delete" in {
     implicit val system = ActorSystem("test")
 
     val connection = getConnection()
