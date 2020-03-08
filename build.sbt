@@ -108,7 +108,8 @@ lazy val assemblySettings = Seq(
   },
 
   assemblyShadeRules in assembly := Seq(
-    ShadeRule.rename("org.apache.commons.beanutils.**" -> "shadedstuff.beanutils.@1").inLibrary("commons-beanutils" % "commons-beanutils" % "1.7.0"),
+    ShadeRule.rename("org.apache.commons.beanutils.**" -> "shadedstuff.beanutils.@1")
+      .inLibrary("commons-beanutils" % "commons-beanutils" % "1.7.0"),
   ),
 
   test in assembly := {},
