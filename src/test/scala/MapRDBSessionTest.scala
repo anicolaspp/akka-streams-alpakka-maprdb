@@ -6,7 +6,7 @@ class MapRDBSessionTest extends FlatSpec with Matchers with ScalaOjaiTesting {
 
   import scala.collection.JavaConverters._
 
-  ignore "MapRDBSession" should "always return the same store" in {
+   "MapRDBSession" should "always return the same store" in {
     val session = MapRDBSession(getConnection())
 
     val storeT1 = session.getStore("table")
@@ -16,7 +16,7 @@ class MapRDBSessionTest extends FlatSpec with Matchers with ScalaOjaiTesting {
     session.getStore("table").find().asScala.size should be(1)
   }
 
-  ignore it should "be able to keep track of multiple stores" in {
+   it should "be able to keep track of multiple stores" in {
     val session = MapRDBSession(getConnection())
 
     (1 to 100)
@@ -29,7 +29,7 @@ class MapRDBSessionTest extends FlatSpec with Matchers with ScalaOjaiTesting {
       .size should be(100)
   }
 
-  ignore it should "close all open stores" in {
+   it should "close all open stores" in {
     val session = MapRDBSession(getConnection())
 
     (1 to 100)
@@ -41,7 +41,7 @@ class MapRDBSessionTest extends FlatSpec with Matchers with ScalaOjaiTesting {
     getConnection().getStore("1").find().asScala.size should be(0)
   }
 
-  ignore it should "be a single instance available all the time" in {
+   it should "be a single instance available all the time" in {
     MapRDBSession(getConnection()) should be(MapRDBSession(getConnection()))
   }
 }

@@ -14,7 +14,7 @@ class SourceTest extends FlatSpec with ScalaOjaiTesting with Matchers with Befor
   import scala.collection.JavaConverters._
 
 
-  ignore "Source" should "read from table" in {
+   "Source" should "read from table" in {
 
     implicit val system = ActorSystem("test")
 
@@ -40,7 +40,7 @@ class SourceTest extends FlatSpec with ScalaOjaiTesting with Matchers with Befor
     Await.result(source, Duration.Inf) should be(100)
   }
 
-  ignore it should "read from table by query" in {
+   it should "read from table by query" in {
     implicit val system = ActorSystem("test")
 
     val ss = Source.fromIterator(() =>

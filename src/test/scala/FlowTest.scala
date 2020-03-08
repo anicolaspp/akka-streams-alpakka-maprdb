@@ -15,7 +15,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
 
   import scala.collection.JavaConverters._
 
-  ignore it should "read from table by id" in {
+   it should "read from table by id" in {
     val store = getConnection().getStore("n1")
 
     (1 to 100)
@@ -37,7 +37,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
     })
   }
 
-  ignore it should "should add objects" in {
+  it should "should add objects" in {
 
     implicit val system = ActorSystem("test")
 
@@ -60,7 +60,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
 
   class Dog(@BeanProperty val name: String, @BeanProperty val age: Int)
 
-  ignore it should "replace" in {
+   it should "replace" in {
 
     implicit val system = ActorSystem("test")
 
@@ -88,7 +88,7 @@ class FlowTest extends FlatSpec with ScalaOjaiTesting with Matchers {
     getConnection().getStore("t2").find(query).asScala.size should be(10)
   }
 
-  ignore it should "delete" in {
+   it should "delete" in {
     implicit val system = ActorSystem("test")
 
     val connection = getConnection()
