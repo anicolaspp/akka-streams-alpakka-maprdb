@@ -7,7 +7,7 @@ This library is an Akka Streams library that can be used to read and write to [M
 MapR-Database performance is analized in this post [ESG Labs Confirms MapR Outperforms Cassandra and HBase by 10x in the Cloud](https://mapr.com/company/press-releases/esg-labs-confirms-mapr-outperforms/).
 
 
-**akka-streams-alpakka-maprdb** brings reactive to MapR-Datase. Interacting with MapR-Datase can be done in many ways, this post [Interacting with MapR-Database](https://medium.com/hackernoon/interacting-with-mapr-db-58c4f482efa1) explaines all different available options. However, in the rise of microservices, the use of reactive components with native non-blocking and integrated back preassure is a must which ultimately inspired us to create this library, **akka-streams-alpakka-maprdb**.
+**akka-streams-alpakka-maprdb** brings reactive to MapR-Database. Interacting with MapR-Database can be done in many ways, this post [Interacting with MapR-Database](https://medium.com/hackernoon/interacting-with-mapr-db-58c4f482efa1) explaines all different available options. However, in the rise of microservices, the use of reactive components with native non-blocking and integrated back preassure is a must which ultimately inspired us to create this library, **akka-streams-alpakka-maprdb**.
 
 The library can be used in both, Java and Scala through the corresponding APIs. These APIs has been designed to work with Akka Streams and follow similar approaches to those presented by Akka. 
 
